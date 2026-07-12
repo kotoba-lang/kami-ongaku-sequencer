@@ -1,0 +1,6 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}}
+ :aliases
+ {:test {:extra-paths ["test"]
+         :main-opts ["-e"
+                     "(require 'kami.ongaku.sequencer-test 'kami.ongaku.sequencer.smf-test) (let [r (clojure.test/run-tests 'kami.ongaku.sequencer-test 'kami.ongaku.sequencer.smf-test)] (System/exit (if (zero? (+ (:fail r) (:error r))) 0 1)))"]}}}
