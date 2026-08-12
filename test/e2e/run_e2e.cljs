@@ -8,7 +8,7 @@
    e554d853d6403c35b1ffe1c4adb37d2a1d557451).
 
    kami-ongaku-sequencer has no audio rendering of its own (out of scope per
-   its own README) -- test/e2e/src/kami/ongaku/e2e/fixture.cljc bridges its
+   its own README) -- test/e2e/src/kami/ongaku/sequencer/e2e/fixture.cljc bridges its
    real tick/pitch/velocity event data (AFTER a real export-smf -> import-smf
    round trip) to the numeric schedule (onset sample position, frequency,
    gain) real DSP needs (see that namespace's docstring for the exact
@@ -16,19 +16,19 @@
    pitches 60/64/67/72/76, distinct velocities 40/70/100/110/127).
 
    This does, in order:
-     0. Requires kami.ongaku.e2e.fixture directly (no browser) and checks
+     0. Requires kami.ongaku.sequencer.e2e.fixture directly (no browser) and checks
         the REAL SMF round trip (export-smf -> import-smf) preserves every
         note's tick/pitch/velocity/duration-ticks/channel exactly --
         the correctness check on top of whatever unit tests already exist.
      1. Drives a real headless Chromium (Playwright) to compile+run
-        (test/e2e/src/kami/ongaku/e2e/{worklet_dsp,main_driver}.cljs,
-        scripts/build-e2e-bundles.sh) kami.ongaku.e2e.fixture/render-plan on
+        (test/e2e/src/kami/ongaku/sequencer/e2e/{worklet_dsp,main_driver}.cljs,
+        scripts/build-e2e-bundles.sh) kami.ongaku.sequencer.e2e.fixture/render-plan on
         the POST-round-trip event data inside a real AudioWorkletProcessor,
         synthesize each of the 5 notes via kotoba-lang/audio's real
         oscillator + ADSR, place each at its onset-sample offset in ONE
         continuous output buffer (not 5 separate renders), and capture the
         actual rendered PCM via OfflineAudioContext.
-     2. Right here (no browser involved), requires kami.ongaku.e2e.fixture
+     2. Right here (no browser involved), requires kami.ongaku.sequencer.e2e.fixture
         and audio.synth directly (the SAME .cljc sources the browser bundle
         was compiled from) and recomputes:
         a. the render plan from the POST-round-trip data -- cross-verified
@@ -57,7 +57,7 @@
             ["fs" :as fs]
             ["path" :as path]
             [audio.synth :as synth]
-            [kami.ongaku.e2e.fixture :as fixture]))
+            [kami.ongaku.sequencer.e2e.fixture :as fixture]))
 
 (def site-dir (path/join (js/process.cwd) "test" "e2e" "page"))
 (def port 8942)
@@ -104,7 +104,7 @@
 
 (defn render-offline
   "-> {:pcm (vector of doubles, length total-samples) :notes [...]}. The
-   exact same computation as kami.ongaku.e2e.worklet-dsp/render-pattern, run
+   exact same computation as kami.ongaku.sequencer.e2e.worklet-dsp/render-pattern, run
    here directly on the .cljc source of truth (no browser/worklet at all)."
   [flat-events]
   (let [{:keys [notes total-samples]} (fixture/render-plan flat-events)

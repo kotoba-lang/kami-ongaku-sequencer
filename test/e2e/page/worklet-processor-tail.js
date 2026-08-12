@@ -8,7 +8,7 @@
 // registerProcessor's real-`class` requirements unambiguous.
 //
 // All scheduling + DSP math comes from the compiled bundle's
-// kami.ongaku.e2e.worklet_dsp.render_pattern (i.e. from kami-ongaku-
+// kami.ongaku.sequencer.e2e.worklet_dsp.render_pattern (i.e. from kami-ongaku-
 // sequencer's OWN real, reimported-after-SMF-round-trip event data +
 // kotoba-lang/audio's OWN oscillator/ADSR, not reimplementations) -- this
 // file only (a) calls it once in the constructor, (b) posts the computed
@@ -20,7 +20,7 @@
 class KamiSequencerProcessor extends AudioWorkletProcessor {
   constructor(options) {
     super();
-    const result = kami.ongaku.e2e.worklet_dsp.render_pattern();
+    const result = kami.ongaku.sequencer.e2e.worklet_dsp.render_pattern();
     this.buffer = result.pcm;
     this.readIdx = 0;
     this.port.postMessage({ plan: result.plan, totalSamples: result.totalSamples });
