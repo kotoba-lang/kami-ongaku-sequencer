@@ -1,10 +1,10 @@
-(ns kami.ongaku.e2e.worklet-dsp
+(ns kami.ongaku.sequencer.e2e.worklet-dsp
   "E2E-only, worklet-side bundle for kami-ongaku-sequencer's real-browser
    AudioWorkletProcessor SMF-round-trip-to-playback proof (see README,
    'Real-browser AudioWorklet SMF round-trip proof'). Requires
    kotoba-lang/audio's own audio.synth (real oscillator + ADSR DSP) directly
    -- not a reimplementation -- on top of the shared
-   kami.ongaku.e2e.fixture (this repo's OWN kami.ongaku.sequencer /
+   kami.ongaku.sequencer.e2e.fixture (this repo's OWN kami.ongaku.sequencer /
    kami.ongaku.sequencer.smf real event/SMF-codec logic, also required
    unmodified by test/e2e/run_e2e.cljs's offline nbb cross-check).
 
@@ -20,7 +20,7 @@
    against Closure's :advanced whole-program DCE, per org-w3-webaudio's own
    worklet_dsp.cljs docstring), callable from the hand-written
    AudioWorkletProcessor tail (test/e2e/page/worklet-processor-tail.js) at
-   its munged path kami.ongaku.e2e.worklet_dsp.render_pattern.
+   its munged path kami.ongaku.sequencer.e2e.worklet_dsp.render_pattern.
 
    render-pattern takes NO arguments: the pattern (5 real note events),
    tempo/PPQ, and the real export-smf -> import-smf round trip are all
@@ -29,7 +29,7 @@
    MessagePort boundary except the (informational) computed plan, echoed
    back for the offline reference to bit-exactly cross-check."
   (:require [audio.synth :as synth]
-            [kami.ongaku.e2e.fixture :as fixture]))
+            [kami.ongaku.sequencer.e2e.fixture :as fixture]))
 
 (defn- synthesize-note
   "-> vector of doubles, length local-len: real audio.synth sine-wave + adsr
@@ -46,7 +46,7 @@
 (defn ^:export render-pattern
   "Computes the render plan from kami-ongaku-sequencer's REAL, reimported
    (post export-smf -> import-smf round trip) event data via
-   kami.ongaku.e2e.fixture/render-plan, then synthesizes each note via
+   kami.ongaku.sequencer.e2e.fixture/render-plan, then synthesizes each note via
    kotoba-lang/audio's real oscillator + ADSR (this *is* that code running
    inside the worklet, not a port of it) and places it at its onset-sample
    offset in ONE continuous output buffer -- proving the tick->sample

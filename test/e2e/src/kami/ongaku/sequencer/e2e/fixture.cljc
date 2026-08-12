@@ -1,4 +1,4 @@
-(ns kami.ongaku.e2e.fixture
+(ns kami.ongaku.sequencer.e2e.fixture
   "Shared, portable (.cljc — JVM + cljs, required unmodified by BOTH the
    real-browser worklet bundle and the offline nbb cross-check) fixture for
    kami-ongaku-sequencer's real-browser AudioWorklet SMF-round-trip-to-

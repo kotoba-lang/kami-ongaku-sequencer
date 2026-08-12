@@ -77,7 +77,7 @@ here), same `OfflineAudioContext` + `audioWorklet.addModule` binding layer
 `audio.synth` oscillator + ADSR envelope for the actual DSP, since this repo
 has none of its own.
 
-`test/e2e/src/kami/ongaku/e2e/fixture.cljc` (shared, portable, required
+`test/e2e/src/kami/ongaku/sequencer/e2e/fixture.cljc` (shared, portable, required
 unmodified by the worklet bundle, the main-driver bundle, AND the offline
 nbb reference) defines the proof pattern: **5 real `kami.ongaku.sequencer`
 note events**, quarter-note spacing (480 ticks at PPQ 480, i.e. one quarter
@@ -104,7 +104,7 @@ and MIDI note → frequency via the standard equal-tempered formula. Velocity
 itself leaves gain to the consuming engine, same stance kami-ongaku-
 sampler's own fixture takes for its `:pitch-offset` unit).
 
-`test/e2e/src/kami/ongaku/e2e/worklet_dsp.cljs` (compiled into the worklet
+`test/e2e/src/kami/ongaku/sequencer/e2e/worklet_dsp.cljs` (compiled into the worklet
 bundle) calls `fixture/render-plan` on the **post-round-trip** event data
 — inside a real `AudioWorkletProcessor` — then synthesizes all 5 notes via
 `audio.synth`'s real oscillator + ADSR and places each one at its own
@@ -177,7 +177,7 @@ Setup and run:
 ```bash
 npm --prefix test/e2e install                    # Playwright
 npx --prefix test/e2e playwright install chromium
-bash scripts/build-e2e-bundles.sh                 # compiles kami.ongaku.e2e.{worklet-dsp,main-driver}
+bash scripts/build-e2e-bundles.sh                 # compiles kami.ongaku.sequencer.e2e.{worklet-dsp,main-driver}
                                                    # -> test/e2e/page/{worklet-processor,main-driver-bundle}.js
                                                    # (JVM/Clojure CLI build step, not an app-runtime
                                                    # choice -- see scripts/build-e2e-bundles.sh)

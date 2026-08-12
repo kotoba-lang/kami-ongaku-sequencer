@@ -1,4 +1,4 @@
-(ns kami.ongaku.e2e.main-driver
+(ns kami.ongaku.sequencer.e2e.main-driver
   "E2E-only, main-thread bundle for kami-ongaku-sequencer's real-browser
    AudioWorkletProcessor SMF-round-trip-to-playback proof. Uses
    kotoba-lang/org-w3-webaudio's own src/w3/webaudio.cljs binding layer (not
@@ -6,7 +6,7 @@
    audioWorklet.addModule + AudioWorkletNode recipe rather than reinventing
    it (org-w3-webaudio commit e554d853d6403c35b1ffe1c4adb37d2a1d557451).
 
-   Also requires kami.ongaku.e2e.fixture directly (the SAME .cljc source the
+   Also requires kami.ongaku.sequencer.e2e.fixture directly (the SAME .cljc source the
    worklet bundle and the offline nbb reference both use) purely to learn
    :total-samples ahead of time -- OfflineAudioContext requires a fixed
    buffer length up front, and fixture/render-plan is what determines how
@@ -27,7 +27,7 @@
    properties are not protected from Closure's internal renaming pass the
    way an ^:export-ed function's own returned object literal is."
   (:require [w3.webaudio :as w3a]
-            [kami.ongaku.e2e.fixture :as fixture]))
+            [kami.ongaku.sequencer.e2e.fixture :as fixture]))
 
 (defn ^:export run-e2e [params]
   (let [{:keys [workletUrl processorName]} (js->clj params :keywordize-keys true)
