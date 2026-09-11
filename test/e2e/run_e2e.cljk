@@ -8,7 +8,7 @@
    e554d853d6403c35b1ffe1c4adb37d2a1d557451).
 
    kami-ongaku-sequencer has no audio rendering of its own (out of scope per
-   its own README) -- test/e2e/src/kami/ongaku/sequencer/e2e/fixture.cljc bridges its
+   its own README) -- test/e2e/src/kami/ongaku/sequencer/e2e/fixture.cljk bridges its
    real tick/pitch/velocity event data (AFTER a real export-smf -> import-smf
    round trip) to the numeric schedule (onset sample position, frequency,
    gain) real DSP needs (see that namespace's docstring for the exact
@@ -51,7 +51,7 @@
    inside test/e2e/ for the Playwright dependency, and this repo's own src/
    plus a checkout of kotoba-lang/audio on the nbb classpath:
 
-     nbb -cp \"src:test/e2e/src:$AUDIO_SRC_PATH\" test/e2e/run_e2e.cljs"
+     nbb -cp \"src:test/e2e/src:$AUDIO_SRC_PATH\" test/e2e/run_e2e.cljk"
   (:require ["playwright" :refer [chromium]]
             ["http" :as http]
             ["fs" :as fs]

@@ -2,7 +2,7 @@
   "Shared, portable (.cljc — JVM + cljs, required unmodified by BOTH the
    real-browser worklet bundle and the offline nbb cross-check) fixture for
    kami-ongaku-sequencer's real-browser AudioWorklet SMF-round-trip-to-
-   playback proof (see test/e2e/run_e2e.cljs and README, 'Real-browser
+   playback proof (see test/e2e/run_e2e.cljk and README, 'Real-browser
    AudioWorklet SMF round-trip proof').
 
    kami-ongaku-sequencer has no audio synthesis of its own (out of scope per
@@ -114,7 +114,7 @@
 ;; real SMF round trip: kami.ongaku.sequencer/flatten-track ->
 ;; kami.ongaku.sequencer.smf/export-smf -> kami.ongaku.sequencer.smf/import-smf.
 ;; Both directions go through the actual VLQ/running-status codec in
-;; src/kami/ongaku/sequencer/smf.cljc -- nothing here reimplements or skips it.
+;; src/kami/ongaku/sequencer/smf.cljk -- nothing here reimplements or skips it.
 
 (defn pre-roundtrip-flat
   "The ORIGINAL flattened track (before any SMF involvement)."
