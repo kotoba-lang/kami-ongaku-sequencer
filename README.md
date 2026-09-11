@@ -54,8 +54,8 @@ tracks. Includes:
 ## Real-browser AudioWorklet SMF round-trip proof (`test/e2e/`)
 
 **This is a test/proof harness, not a claim that this repo does audio
-synthesis.** `test/kami/ongaku/sequencer_test.cljc` and
-`test/kami/ongaku/sequencer/smf_test.cljc` already unit-test the event/
+synthesis.** `test/kami/ongaku/sequencer_test.cljk` and
+`test/kami/ongaku/sequencer/smf_test.cljk` already unit-test the event/
 quantize/groove logic and the SMF codec exhaustively. This E2E closes the
 one gap that kind of test can't: it proves this repo's real tick/pitch/
 velocity event data, **after a genuine `export-smf` → `import-smf` round
@@ -77,7 +77,7 @@ here), same `OfflineAudioContext` + `audioWorklet.addModule` binding layer
 `audio.synth` oscillator + ADSR envelope for the actual DSP, since this repo
 has none of its own.
 
-`test/e2e/src/kami/ongaku/sequencer/e2e/fixture.cljc` (shared, portable, required
+`test/e2e/src/kami/ongaku/sequencer/e2e/fixture.cljk` (shared, portable, required
 unmodified by the worklet bundle, the main-driver bundle, AND the offline
 nbb reference) defines the proof pattern: **5 real `kami.ongaku.sequencer`
 note events**, quarter-note spacing (480 ticks at PPQ 480, i.e. one quarter
@@ -104,13 +104,13 @@ and MIDI note → frequency via the standard equal-tempered formula. Velocity
 itself leaves gain to the consuming engine, same stance kami-ongaku-
 sampler's own fixture takes for its `:pitch-offset` unit).
 
-`test/e2e/src/kami/ongaku/sequencer/e2e/worklet_dsp.cljs` (compiled into the worklet
+`test/e2e/src/kami/ongaku/sequencer/e2e/worklet_dsp.cljk` (compiled into the worklet
 bundle) calls `fixture/render-plan` on the **post-round-trip** event data
 — inside a real `AudioWorkletProcessor` — then synthesizes all 5 notes via
 `audio.synth`'s real oscillator + ADSR and places each one at its own
 onset-sample offset in **one continuous output buffer** (not 5 separate
 renders — this is what actually exercises the tick→sample scheduling math,
-not just per-note pitch). `test/e2e/run_e2e.cljs` (nbb) then requires the
+not just per-note pitch). `test/e2e/run_e2e.cljk` (nbb) then requires the
 *same* `fixture.cljc` and `audio.synth` sources directly — a different
 runtime, no browser involved — and:
 
@@ -182,7 +182,7 @@ bash scripts/build-e2e-bundles.sh                 # compiles kami.ongaku.sequenc
                                                    # (JVM/Clojure CLI build step, not an app-runtime
                                                    # choice -- see scripts/build-e2e-bundles.sh)
 AUDIO_SRC_PATH=/path/to/kotoba-lang/audio/src
-nbb -cp "src:test/e2e/src:$AUDIO_SRC_PATH" test/e2e/run_e2e.cljs
+nbb -cp "src:test/e2e/src:$AUDIO_SRC_PATH" test/e2e/run_e2e.cljk
 ```
 
 Exits 0 and prints the full report (round-trip check, plan cross-checks,

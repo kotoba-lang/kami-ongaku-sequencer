@@ -6,7 +6,7 @@
    -- not a reimplementation -- on top of the shared
    kami.ongaku.sequencer.e2e.fixture (this repo's OWN kami.ongaku.sequencer /
    kami.ongaku.sequencer.smf real event/SMF-codec logic, also required
-   unmodified by test/e2e/run_e2e.cljs's offline nbb cross-check).
+   unmodified by test/e2e/run_e2e.cljk's offline nbb cross-check).
 
    Built the same way as org-w3-webaudio's and kami-ongaku-sampler's own
    test/e2e/src/.../worklet_dsp.cljs (:optimizations advanced +

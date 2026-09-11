@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # Compiles the two bundles needed for kami-ongaku-sequencer's real-browser
-# AudioWorkletProcessor SMF-round-trip-to-playback E2E (test/e2e/run_e2e.cljs):
+# AudioWorkletProcessor SMF-round-trip-to-playback E2E (test/e2e/run_e2e.cljk):
 #
-#   1. test/e2e/src/kami/ongaku/sequencer/e2e/main_driver.cljs -> main-thread bundle
+#   1. test/e2e/src/kami/ongaku/sequencer/e2e/main_driver.cljk -> main-thread bundle
 #      (page/main-driver-bundle.js). Uses kotoba-lang/org-w3-webaudio's own
 #      src/w3/webaudio.cljs binding layer to drive OfflineAudioContext /
 #      audioWorklet.addModule / AudioWorkletNode from the page.
-#   2. test/e2e/src/kami/ongaku/sequencer/e2e/worklet_dsp.cljs -> worklet-side bundle
+#   2. test/e2e/src/kami/ongaku/sequencer/e2e/worklet_dsp.cljk -> worklet-side bundle
 #      (page/worklet-processor.js). Requires this repo's own
 #      kami.ongaku.sequencer / kami.ongaku.sequencer.smf (real event IR +
-#      SMF codec, via the shared test/e2e/src/kami/ongaku/sequencer/e2e/fixture.cljc)
+#      SMF codec, via the shared test/e2e/src/kami/ongaku/sequencer/e2e/fixture.cljk)
 #      and kotoba-lang/audio's audio.synth (real oscillator + ADSR DSP), and
 #      exports a render-pattern entrypoint consumed by the hand-written
 #      AudioWorkletProcessor registration in page/worklet-processor-tail.js.
