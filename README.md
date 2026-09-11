@@ -27,7 +27,7 @@ tracks. Includes:
   file semantics — SMF itself has no concept of DAW clips).
 - Program-change and sysex events are safely skipped on import, not modeled.
 - `.cljc` byte-level helpers in `smf.cljc` are written portably for `:cljs`
-  but were only exercised under `:clj` (`clojure -M:test`) in this repo's own
+  but were only exercised under `:clj` (`kbb -M:test`) in this repo's own
   CI so far — no `:cljs` unit-test runner has been wired up yet (the
   real-browser E2E below now DOES exercise `sequencer.cljc`/`smf.cljc` under
   `:cljs`, compiled with `:optimizations :advanced`, but that's a one-off
@@ -182,7 +182,7 @@ bash scripts/build-e2e-bundles.sh                 # compiles kami.ongaku.sequenc
                                                    # (JVM/Clojure CLI build step, not an app-runtime
                                                    # choice -- see scripts/build-e2e-bundles.sh)
 AUDIO_SRC_PATH=/path/to/kotoba-lang/audio/src
-nbb -cp "src:test/e2e/src:$AUDIO_SRC_PATH" test/e2e/run_e2e.cljk
+kbb --backend sci -cp "src:test/e2e/src:$AUDIO_SRC_PATH" test/e2e/run_e2e.cljk
 ```
 
 Exits 0 and prints the full report (round-trip check, plan cross-checks,
@@ -198,5 +198,5 @@ SHA); `test/e2e/page/*-bundle.js`, `test/e2e/page/worklet-processor.js`, and
 ## Test
 
 ```bash
-clojure -M:test
+kbb -M:test
 ```
